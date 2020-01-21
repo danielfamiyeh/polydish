@@ -1,9 +1,24 @@
+import Tools from "./Tools.js";
+
 export default class Vector
 {
     constructor(x,y)
     {
         this._x = x;
         this._y = y;
+    }
+
+    static UnitVec()
+    {
+        let x = Tools.randNum(-1,2),
+            y = Tools.randNum(-1,2);
+
+        return Vector.Normalise(new Vector(x,y));
+    }
+
+    static Scale(v,lambda)
+    {
+        return new Vector(v.x * lambda, v.y*lambda);
     }
 
     static Sub(v1,v2)
