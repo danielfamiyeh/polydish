@@ -1,0 +1,234 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250) (preloaded format=pdflatex 2020.1.10)  20 JAN 2020 21:56
+entering extended mode
+**./design.tex
+(design.tex
+LaTeX2e <2019-10-01> patch level 3
+(/home/kwaks/.miktex/texmfs/install/tex/latex/base/article.cls
+Document Class: article 2019/10/25 v1.4k Standard LaTeX document class
+(/home/kwaks/.miktex/texmfs/install/tex/latex/base/size10.clo
+File: size10.clo 2019/10/25 v1.4k Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/home/kwaks/.miktex/texmfs/install/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2019/11/16 v2.17d AMS math features
+\@mathmargin=\skip43
+
+For additional information on amsmath, use the `?' option.
+(/home/kwaks/.miktex/texmfs/install/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(/home/kwaks/.miktex/texmfs/install/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks14
+\ex@=\dimen103
+))
+(/home/kwaks/.miktex/texmfs/install/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen104
+)
+(/home/kwaks/.miktex/texmfs/install/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count88
+LaTeX Info: Redefining \frac on input line 227.
+\uproot@=\count89
+\leftroot@=\count90
+LaTeX Info: Redefining \overline on input line 389.
+\classnum@=\count91
+\DOTSCASE@=\count92
+LaTeX Info: Redefining \ldots on input line 486.
+LaTeX Info: Redefining \dots on input line 489.
+LaTeX Info: Redefining \cdots on input line 610.
+\Mathstrutbox@=\box27
+\strutbox@=\box28
+\big@size=\dimen105
+LaTeX Font Info:    Redeclaring font encoding OML on input line 733.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
+\macc@depth=\count93
+\c@MaxMatrixCols=\count94
+\dotsspace@=\muskip10
+\c@parentequation=\count95
+\dspbrk@lvl=\count96
+\tag@help=\toks15
+\row@=\count97
+\column@=\count98
+\maxfields@=\count99
+\andhelp@=\toks16
+\eqnshift@=\dimen106
+\alignsep@=\dimen107
+\tagshift@=\dimen108
+\tagwidth@=\dimen109
+\totwidth@=\dimen110
+\lineht@=\dimen111
+\@envbody=\toks17
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks18
+LaTeX Info: Redefining \[ on input line 2858.
+LaTeX Info: Redefining \] on input line 2859.
+) (design.aux)
+\openout1 = `design.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+[1
+
+{/home/kwaks/.miktex/texmfs/data/pdftex/config/pdftex.map}] [1]
+Underfull \hbox (badness 10000) in paragraph at lines 21--33
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--33
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--33
+
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 35--37
+
+ []
+
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 1
+54.
+(/home/kwaks/.miktex/texmfs/install/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 154.
+ [3]
+Underfull \hbox (badness 10000) in paragraph at lines 172--174
+
+ []
+
+
+Overfull \hbox (2.08391pt too wide) in paragraph at lines 176--180
+\OT1/cmr/m/n/10 However, this only stabilises growth and does not necessitate t
+hat the equilibrium
+ []
+
+[4]
+Overfull \hbox (11.71362pt too wide) in paragraph at lines 205--209
+\OT1/cmr/m/n/10 Splits representation into grid and linear sub-components. The 
+grid sub-component
+ []
+
+
+Overfull \hbox (2.9728pt too wide) in paragraph at lines 205--209
+\OT1/cmr/m/n/10 represents the graph and the linear genome provides node defini
+tions and specifies
+ []
+
+[5]
+Overfull \hbox (1.82011pt too wide) in paragraph at lines 215--217
+\OT1/cmr/m/n/10 Genomes are written in a graph transformation language that spe
+cify cell division
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 215--217
+
+ []
+
+[6]
+Overfull \hbox (9.19736pt too wide) in paragraph at lines 268--272
+\OT1/cmr/m/n/10 Genomes are linear representations of network connectivity cont
+aining \OT1/cmr/m/it/10 connnection
+ []
+
+
+Overfull \hbox (1.24141pt too wide) in paragraph at lines 268--272
+\OT1/cmr/m/n/10 expressed and an innovation number. In structural mutation, the
+ new connection
+ []
+
+[7]
+Overfull \hbox (1.63945pt too wide) in paragraph at lines 274--279
+\OT1/cmr/m/n/10 There is a chance a piece of structural innovation can receive 
+differeing innovation
+ []
+
+
+Overfull \hbox (2.02837pt too wide) in paragraph at lines 274--279
+\OT1/cmr/m/n/10 numbers in a single generation if it occures more than once via
+ single-generational
+ []
+
+[8]
+Overfull \hbox (27.01242pt too wide) in paragraph at lines 304--304
+[]\OT1/cmr/bx/n/12 4) The Art of Artificial Evolution - A Handbook on Evolution
+ary
+ []
+
+[9] [10]
+Overfull \hbox (1.12848pt too wide) in paragraph at lines 368--369
+\OT1/cmr/m/n/10 reproducing agent passes state variables: \OT1/cmr/m/it/10 loca
+tion\OT1/cmr/m/n/10 , \OT1/cmr/m/it/10 speed\OT1/cmr/m/n/10 , \OT1/cmr/m/it/10 
+curvature \OT1/cmr/m/n/10 and \OT1/cmr/m/it/10 covColor\OT1/cmr/m/n/10 .
+ []
+
+
+Overfull \hbox (8.55168pt too wide) detected at line 377
+[]
+ []
+
+[11]
+Overfull \hbox (22.7365pt too wide) in paragraph at lines 384--385
+[]\OT1/cmr/bx/n/10 Energy \OT1/cmr/m/n/10 - Positive real number that is consum
+ed in movement and reproduction.
+ []
+
+[12] (design.aux) ) 
+Here is how much of TeX's memory you used:
+ 903 strings out of 494411
+ 10231 string characters out of 3174490
+ 77598 words of memory out of 3000000
+ 5059 multiletter control sequences out of 15000+200000
+ 9728 words of font info for 35 fonts, out of 3000000 for 9000
+ 0 hyphenation exceptions out of 8191
+ 30i,8n,23p,390b,185s stack positions out of 5000i,500n,10000p,200000b,50000s
+</home/kwaks/.miktex/texmfs/install/fonts/type1/public/amsfo
+nts/cm/cmbx10.pfb></home/kwaks/.miktex/texmfs/install/fonts/type1/public/amsfon
+ts/cm/cmbx12.pfb></home/kwaks/.miktex/texmfs/install/fonts/type1/public/amsfont
+s/cm/cmbxti10.pfb></home/kwaks/.miktex/texmfs/install/fonts/type1/public/amsfon
+ts/cm/cmex10.pfb></home/kwaks/.miktex/texmfs/install/fonts/type1/public/amsfont
+s/cm/cmmi10.pfb></home/kwaks/.miktex/texmfs/install/fonts/type1/public/amsfonts
+/cm/cmmi7.pfb></home/kwaks/.miktex/texmfs/install/fonts/type1/public/amsfonts/c
+m/cmr10.pfb></home/kwaks/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/
+cmr12.pfb></home/kwaks/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cm
+r17.pfb></home/kwaks/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr7
+.pfb></home/kwaks/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy10.
+pfb></home/kwaks/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy7.pf
+b></home/kwaks/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmti10.pfb
+>
+Output written on design.pdf (13 pages, 207406 bytes).
+PDF statistics:
+ 97 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

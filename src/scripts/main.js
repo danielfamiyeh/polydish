@@ -21,18 +21,15 @@ canvas.addEventListener("mousedown", function(e){
 
 ctx.canvas.width = WIDTH;
 ctx.canvas.height = HEIGHT;
-let ant = new Ant(new Vector(250,250), new Vector(0,0), 1000, [200,100,100]);
-antList.push(ant);
-for(let i=0; i<10; i++)
+
+for(let i=0; i<20; i++)
 {
     foodList.push(new Food(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), [Tools.randNum(255), Tools.randNum(255), Tools.randNum(255)]));
 }
 
-for(let i=0; i<50; i++)
+for(let i=0; i<30; i++)
 {
-    antList.push(new Ant(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), 100, Tools.randRGB()));
-    console.log(antList[i].trueColour);
-    antList[i].steeringForce = Tools.randNum(0.01, 0.05);
+    antList.push(new Ant(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), 200, Tools.randRGB(), Math.random() * 2, Math.random(), Math.random() * 30));
 }
 
 function render()
@@ -48,7 +45,6 @@ function render()
 
 function update()
 {
-    console.log(antList.length);
     if(foodList.length<30)
     {
         foodList.push(new Food(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)),Tools.randRGB()));
@@ -75,6 +71,7 @@ function update()
                 }
             }
         })
+
         ant.update(antList);
         if(ant.energy <= 0)
         {
