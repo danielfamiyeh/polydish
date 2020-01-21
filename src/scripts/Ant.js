@@ -33,7 +33,7 @@ export default class Ant
                 this._size += 0.00001 * this._timeAlive;
             }
             
-            ctx.strokeStyle = `rgba(${this._colour[0]},${this._colour[1]},${this.colour[2]},${this._energy/this._initialEnergy})`;
+            ctx.strokeStyle = `rgba(${this._colour[0]},${this._colour[1]},${this.colour[2]},${(this._energy/this._initialEnergy)-0.3})`;
             ctx.beginPath();
             ctx.arc(this._position.x, this._position.y, this._size, 0, 2*Math.PI);
             ctx.stroke();
@@ -50,7 +50,7 @@ export default class Ant
             this._acceleration.scale(0);
 
             this._shouldReproduce = (Math.random() * 100 < 1) ? true : false;
-            if(this._shouldReproduce && this._timeAlive > 50) this.reproduce(antList);
+            if(this._shouldReproduce && this._timeAlive > 60) this.reproduce(antList);
 
             this._energy-=this._consumption;
             this._timeAlive++;
@@ -60,7 +60,7 @@ export default class Ant
     reproduce(antList)
     {
         let reproduced = false;
-        if(antList.length < 200)
+        if(antList.length < 100)
         {
             antList.forEach(ant => {
                 let dist = Vector.Sub(ant.position, this._position).mag;
@@ -193,9 +193,9 @@ export default class Ant
 
     changeColour(food)
     {
-        let deltaR = (food.colour[0] - this._colour[0]) / 3,
-            deltaG = (food.colour[1] - this._colour[1]) / 3,
-            deltaB = (food.colour[2] - this._colour[2]) / 3;
+        let deltaR = (food.colour[0] - this._colour[0]) / 10,
+            deltaG = (food.colour[1] - this._colour[1]) / 10,
+            deltaB = (food.colour[2] - this._colour[2]) / 10;
 
         this._colour[0] += deltaR;
         this._colour[1] += deltaG;

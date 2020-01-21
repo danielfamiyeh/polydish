@@ -10,8 +10,8 @@ let canvas = document.getElementById("canvas"),
     foodList = [],
     count = 0;
 
-const WIDTH = 300,
-    HEIGHT = 300;
+const WIDTH = 500,
+    HEIGHT = 500;
 
 canvas.addEventListener("mousedown", function(e){
     target.x = e.clientX;
@@ -27,7 +27,7 @@ for(let i=0; i<50; i++)
     foodList.push(new Food(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Tools.randRGB()));
 }
 
-for(let i=0; i<20; i++)
+for(let i=0; i<60; i++)
 {
     antList.push(new Ant(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), 200, Tools.randRGB(), Math.random(), Math.random(), Math.random() * 30, Math.random() * 0.1, Math.random() * 10));
 }
@@ -88,17 +88,6 @@ function main()
     update();
 
     window.requestAnimationFrame(main);
-}
-
-function arrayRemove(arr, index)
-{
-    for(let i=arr.length; i>0; --i)
-    {
-        if(i === index)
-        {
-            arr.splice(i, 1);
-        }
-    }
 }
 
 main();
