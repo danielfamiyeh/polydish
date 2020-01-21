@@ -47,7 +47,7 @@ export default class Ant
             this._position.add(this._velocity);
             this._acceleration.scale(0);
 
-            this._shouldReproduce = (Math.random * 100 < 10) ? true : false;
+            this._shouldReproduce = (Math.random() * 100 < 10) ? true : false;
             if(this._shouldReproduce && this._timeAlive > 50) this.reproduce(antList);
 
             this._energy-=this._consumption;
@@ -64,18 +64,19 @@ export default class Ant
                 let dist = Vector.Sub(ant.position, this._position).mag;
                 if(dist > 0 && dist < 10)
                 {
-                    let thisGenome = [this._position, this._velocity, this._maxSpeed, this._trueColour, this._consumption, this._rop, this._steeringForce],
-                        otherGenome = [ant.position, ant.velocity, ant.maxSpeed, ant.trueColour, ant.rop, ant.consumption, ant.steeringForce],
+                    let thisGenome = [new Vector(this._position.x, this._position.y), new Vector(this._velocity.x, this._velocity.y), this._maxSpeed, this._trueColour, this._consumption, this._rop, this._steeringForce],
+                        otherGenome = [new Vector(ant.position.x, ant.position.y), new Vector(ant.velocity.x, ant.velocity.y), ant.maxSpeed, ant.trueColour, ant.rop, ant.consumption, ant.steeringForce],
                         midPoint = Tools.randNumFloor(0,8);
                     let childGenome = this.crossover(thisGenome, otherGenome, midPoint);
                     let newAnt = new Ant(childGenome[0], childGenome[1], 200, childGenome[3], childGenome[2], childGenome[4], childGenome[5], childGenome[6]);
                     antList.push(newAnt);
+                    console.log(newAnt);
                     reproduced = true;
                 }
             })
             if(!reproduced)
             {
-                antList.push(new Ant(new Vector(this._position.x, this._position.y), new Vector(this._velocity.x, this._velocity.y), 200, this._trueColour, this._maxSpeed));
+            //    antList.push(new Ant(new Vector(this._position.x, this._position.y), new Vector(this._velocity.x, this._velocity.y), 200, this._trueColour, this._maxSpeed));
                 reproduced = true;
             }
         }

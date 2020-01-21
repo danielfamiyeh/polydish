@@ -22,14 +22,14 @@ canvas.addEventListener("mousedown", function(e){
 ctx.canvas.width = WIDTH;
 ctx.canvas.height = HEIGHT;
 
-for(let i=0; i<20; i++)
+for(let i=0; i<50; i++)
 {
     foodList.push(new Food(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), [Tools.randNum(255), Tools.randNum(255), Tools.randNum(255)]));
 }
 
-for(let i=0; i<30; i++)
+for(let i=0; i<20; i++)
 {
-    antList.push(new Ant(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), 200, Tools.randRGB(), Math.random() * 2, Math.random(), Math.random() * 30));
+    antList.push(new Ant(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), 500, Tools.randRGB(), Math.random() * 2, Math.random(), Math.random() * 30));
 }
 
 function render()
