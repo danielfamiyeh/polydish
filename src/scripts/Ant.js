@@ -3,12 +3,13 @@ import Tools from "./Tools.js";
 
 export default class Ant
 {
-    constructor(p,v,e,c,ms = 0.5, ec=0.2,rop=10,sf=0.01)
+    constructor(p,v,e,c,ms = 0.5, ec=0.2,rop=10,sf=0.01, mr=0.1)
     {
         this._timeAlive = 0;
         this._position = p;
         this._velocity = v;
-        this._maxSpeed = 0.5;
+        this._initialEnergy = e;
+        this._maxSpeed = ms;
         this._acceleration = new Vector(0,0);
         this._trueColour = [c[0],c[1],c[2]];
         this._colour = c;
@@ -19,6 +20,7 @@ export default class Ant
         this._rop = rop;
         this._size = 0.001;
         this._steeringForce = sf;
+        this._mutationRate = mr;
 
     }
 
@@ -28,10 +30,10 @@ export default class Ant
         {
             if(this._size < 3)
             {
-                this._size += 0.0001 * this._timeAlive;
+                this._size += 0.00001 * this._timeAlive;
             }
             
-            ctx.strokeStyle = `rgba(${this._colour[0]},${this._colour[1]},${this.colour[2]},${this._energy/1000})`;
+            ctx.strokeStyle = `rgba(${this._colour[0]},${this._colour[1]},${this.colour[2]},${this._energy/this._initialEnergy})`;
             ctx.beginPath();
             ctx.arc(this._position.x, this._position.y, this._size, 0, 2*Math.PI);
             ctx.stroke();
@@ -47,7 +49,7 @@ export default class Ant
             this._position.add(this._velocity);
             this._acceleration.scale(0);
 
-            this._shouldReproduce = (Math.random() * 100 < 10) ? true : false;
+            this._shouldReproduce = (Math.random() * 100 < 1) ? true : false;
             if(this._shouldReproduce && this._timeAlive > 50) this.reproduce(antList);
 
             this._energy-=this._consumption;
@@ -62,15 +64,16 @@ export default class Ant
         {
             antList.forEach(ant => {
                 let dist = Vector.Sub(ant.position, this._position).mag;
-                if(dist > 0 && dist < 10)
+
+                if(dist > 0 && dist <= 5 && ant != this)
                 {
-                    let thisGenome = [new Vector(this._position.x, this._position.y), new Vector(this._velocity.x, this._velocity.y), this._maxSpeed, this._trueColour, this._consumption, this._rop, this._steeringForce],
-                        otherGenome = [new Vector(ant.position.x, ant.position.y), new Vector(ant.velocity.x, ant.velocity.y), ant.maxSpeed, ant.trueColour, ant.rop, ant.consumption, ant.steeringForce],
+                    let thisGenome = [new Vector(this._position.x, this._position.y), new Vector(this._velocity.x, this._velocity.y), [this._trueColour[0], this._trueColour[1], this._trueColour[2]], this._maxSpeed , this._consumption, this._rop, this._steeringForce],
+                        otherGenome = [new Vector(ant.position.x, ant.position.y), new Vector(ant.velocity.x, ant.velocity.y), [ant.trueColour[0], ant.trueColour[1], ant.trueColour[2]], ant.maxSpeed, ant.consumption, ant.rop, ant.steeringForce],
                         midPoint = Tools.randNumFloor(0,8);
                     let childGenome = this.crossover(thisGenome, otherGenome, midPoint);
-                    let newAnt = new Ant(childGenome[0], childGenome[1], 200, childGenome[3], childGenome[2], childGenome[4], childGenome[5], childGenome[6]);
+                    if(Math.random() * 100 <= this._mutationRate * 100) this.mutate(childGenome);
+                    let newAnt = new Ant(childGenome[0], childGenome[1], 200, childGenome[2], childGenome[3], childGenome[4], childGenome[5], childGenome[6], this._mutationRate);
                     antList.push(newAnt);
-                    console.log(newAnt);
                     reproduced = true;
                 }
             })
@@ -96,6 +99,79 @@ export default class Ant
         return newGenome;
     }
 
+    /* 8 GENES THAT CAN MUTATE MUTATION
+    Velocity,
+    TrueColour (R,G and B individually)
+    Max Speed
+    Energy Consumption
+    Radius of Perception
+    Steering Force
+    */
+
+    mutate(genome)
+    {
+        let num = Math.floor(Math.random() * genome.length + 1); //Number of genes to mutate
+        let indexes = [];
+        for(let i=0; i<num; i++)
+        {
+            indexes.push(Math.floor(Math.random() * 8));
+        }
+        indexes.forEach(i => {
+            switch (i)
+            {
+                case 1: //Initial Velocity
+                    genome[i] = Vector.UnitVec();
+                break;
+
+                case 2: //True Colour
+                    genome[i] = Tools.randRGB();
+                break;
+                case 3: //Max Speed
+                case 4: //Energy Consumption
+                    genome[i] = Math.random();
+                break;
+                case 5: //Radius of Perception
+                    genome[i] = Math.random() * 20;
+                break;
+                case 6: //Steering Force
+                    genome[i] = Math.random();
+                break;
+            }
+        });
+    }
+
+    keepInBounds(WIDTH, HEIGHT)
+    {
+        if(this._position.x <= 0)
+        {
+            let target = new Vector(this._maxSpeed, this._velocity.y),
+            steer = Vector.Sub(target, this._velocity);
+            steer.constrain(this._steeringForce);
+            this.addForce(steer);
+        }
+        if(this._position.x >= WIDTH)
+        {
+            let target = new Vector(-this._maxSpeed, this._velocity.y),
+            steer = Vector.Sub(target, this._velocity);
+            steer.constrain(this._steeringForce);
+            this.addForce(steer);
+        }
+        if(this._position.y <= 0)
+        {
+            let target = new Vector(this._maxSpeed, this._velocity.y),
+            steer = Vector.Sub(target, this._velocity);
+            steer.constrain(this._steeringForce);
+            this.addForce(steer);
+        }
+        if(this._position.y >= HEIGHT)
+        {
+            let target = new Vector(-this._maxSpeed, this._velocity.y),
+            steer = Vector.Sub(target, this._velocity);
+            steer.constrain(this._steeringForce);
+            this.addForce(steer);
+        }
+    }
+
     seek(target)
     {
 
@@ -117,9 +193,9 @@ export default class Ant
 
     changeColour(food)
     {
-        let deltaR = (food.colour[0] - this._colour[0]) / 2,
-            deltaG = (food.colour[1] - this._colour[1]) / 2,
-            deltaB = (food.colour[2] - this._colour[2]) / 2;
+        let deltaR = (food.colour[0] - this._colour[0]) / 3,
+            deltaG = (food.colour[1] - this._colour[1]) / 3,
+            deltaB = (food.colour[2] - this._colour[2]) / 3;
 
         this._colour[0] += deltaR;
         this._colour[1] += deltaG;
