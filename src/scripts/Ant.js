@@ -10,7 +10,7 @@ export default class Ant
         this._velocity = v;
         this._maxSpeed = ms;
         this._acceleration = new Vector(0,0);
-        this._trueColour = c;
+        this._trueColour = [c[0],c[1],c[2]];
         this._colour = c;
         this._energy = e;
         this._size = 1 * this._timeAlive;
@@ -65,10 +65,10 @@ export default class Ant
                 if(dist > 0 && dist < 10)
                 {
                     let thisGenome = [this._position, this._velocity, this._maxSpeed, this._trueColour[0], this._trueColour[1], this._trueColour[2], this._rop, this._steeringForce],
-                        otherGenome = [ant.position, ant.velocity, ant.maxSpeed, ant.trueColour[0], ant.trueColour[1], ant.trueColour[2], ant.rop, ant.steeringForce],
+                        otherGenome = [ant.position, ant.velocity, ant.maxSpeed, ant.trueColour[0], ant.rop, ant.steeringForce],
                         midPoint = Tools.randNumFloor(0,8);
                     let childGenome = this.crossover(thisGenome, otherGenome, midPoint);
-                    console.log(midPoint, childGenome);
+                    console.log(childGenome);
                     reproduced = true;
                 }
             })

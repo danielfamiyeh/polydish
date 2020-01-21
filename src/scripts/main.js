@@ -31,6 +31,7 @@ for(let i=0; i<10; i++)
 for(let i=0; i<50; i++)
 {
     antList.push(new Ant(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), 100, Tools.randRGB()));
+    console.log(antList[i].trueColour);
     antList[i].steeringForce = Tools.randNum(0.01, 0.05);
 }
 
