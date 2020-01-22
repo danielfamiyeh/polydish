@@ -191,7 +191,7 @@ export default class Agent
             antList.forEach(ant => {
                 let dist = Vector.Sub(ant.position, this._position).mag;
 
-                if(dist > 0 && dist <= 10 && ant != this)
+                if(dist > 0 && dist <= 10 && ant != this && this.constructor === ant.constructor)
                 {
                     let midPoint = Tools.randNumFloor(0,this.genome.length);   
                     let childGenome = this.crossover(this.genome, ant.genome, midPoint);
