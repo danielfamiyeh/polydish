@@ -32,9 +32,11 @@ for(let i=0; i<100; i++)
 
 let s = new Square(new Vector(50,50), Vector.UnitVec(), 200, Tools.randRGB(), 1, 0.2,20,0.5,0.01);
 
-for(let i=0; i<1000; i++)
+for(let i=0; i<25; i++)
 {
     antList.push(new Circle(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), Math.random() * 500, Tools.randRGB(), Math.random(), Math.random(), Math.random() * WIDTH/10, Math.random() * 0.07, Math.random() * 10));
+//    antList[i].shouldSwarm = (Math.floor(Math.random() * 2) > 0) ? true : false;
+    antList.push(new Square(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), Math.random() * 500, Tools.randRGB(), Math.random(), Math.random(), Math.random() * WIDTH/10, Math.random() * 0.07, Math.random() * 10));
 }
 antList.push(s);
 

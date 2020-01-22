@@ -5,6 +5,7 @@ export default class Square extends Agent
     constructor(p,v,e,c,ms = 0.5, ec=0.2,rop=10,sf, mr)
     {
         super(p,v,e,c,ms, ec,rop,sf, mr);
+        this._angle = 0;
     }
     render(ctx)
     {

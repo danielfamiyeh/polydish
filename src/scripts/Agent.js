@@ -76,6 +76,7 @@ export default class Agent
     swarm(agentList)
     {
         this.align(agentList);
+        this.cohesion(agentList);
     }
 
     align(agentList) //alignment
@@ -98,7 +99,7 @@ export default class Agent
                     steeringForce = Vector.Sub(targetVelocity, this.velocity);
                 
                 steeringForce.constrain(this._steeringForce);
-                steeringForce.scale(0.01);
+                steeringForce.scale(0.05);
                 this.addForce(steeringForce);
             }
         }
@@ -108,7 +109,7 @@ export default class Agent
     {
         let tot = 0,
             avgPos = new Vector(0,0);
-        for(agent in agentList)
+        for(let agent in agentList)
         {
             let dir = Vector.Sub(agentList[agent].position, this._position),
                 dist = dir.mag;
@@ -125,6 +126,7 @@ export default class Agent
                 steeringForce = Vector.Sub(targetVelocity, this._velocity);
 
                 steeringForce.constrain(this._steeringForce);
+                steeringForce.scale(0.9);
                 this.addForce(steeringForce);
         }
     }
@@ -189,7 +191,7 @@ export default class Agent
             antList.forEach(ant => {
                 let dist = Vector.Sub(ant.position, this._position).mag;
 
-                if(dist > 0 && dist <= 5 && ant != this)
+                if(dist > 0 && dist <= 10 && ant != this)
                 {
                     let midPoint = Tools.randNumFloor(0,this.genome.length);   
                     let childGenome = this.crossover(this.genome, ant.genome, midPoint);
