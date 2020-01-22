@@ -10,8 +10,10 @@ let canvas = document.getElementById("canvas"),
     foodList = [],
     count = 0;
 
-const WIDTH = 500,
-    HEIGHT = 500;
+const WIDTH = window.innerWidth,
+    HEIGHT = window.innerHeight;
+
+
 
 canvas.addEventListener("mousedown", function(e){
     target.x = e.clientX;
@@ -27,9 +29,9 @@ for(let i=0; i<50; i++)
     foodList.push(new Food(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Tools.randRGB()));
 }
 
-for(let i=0; i<60; i++)
+for(let i=0; i<170; i++)
 {
-    antList.push(new Ant(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), 200, Tools.randRGB(), Math.random(), Math.random(), Math.random() * 30, Math.random() * 0.1, Math.random() * 10));
+    antList.push(new Ant(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), Math.random() * 200, Tools.randRGB(), Math.random(), Math.random(), Math.random() * 30, Math.random() * 0.09, Math.random() * 10));
 }
 
 function render()
@@ -45,41 +47,44 @@ function render()
 
 function update()
 {
-    if(foodList.length<50)
-    {
-        foodList.push(new Food(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)),Tools.randRGB()));
-    }
+    if(count < 550)
+        {
+        if(foodList.length<50)
+        {
+            foodList.push(new Food(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)),Tools.randRGB()));
+        }
 
-    antList.forEach((ant, aIndex) => {
-        foodList.forEach((food,index) => {
-            if(food != null)
-            {
-                let dist = Vector.Sub(food.position, ant.position).mag;
-                if(dist < ant.rop)
+        antList.forEach((ant, aIndex) => {
+            foodList.forEach((food,index) => {
+                if(food != null)
                 {
-                    ant.seek(food.position);
-                    if(dist < 1)
+                    let dist = Vector.Sub(food.position, ant.position).mag;
+                    if(dist < ant.rop)
                     {
-                        if(food.eaten != true)
+                        ant.seek(food.position);
+                        if(dist < 1)
                         {
-                            food.eaten = true;
-                            ant.energy+=10;
-                            ant.changeColour(food);
-                            foodList.splice(index,1); 
-                        }  
+                            if(food.eaten != true)
+                            {
+                                food.eaten = true;
+                                ant.energy+=10;
+                                ant.changeColour(food);
+                                foodList.splice(index,1); 
+                            }  
+                        }
                     }
                 }
+            })
+
+            ant.keepInBounds(WIDTH,HEIGHT);
+            ant.update(antList);
+            if(ant.energy <= 0)
+            {
+                antList.splice(aIndex,1);
             }
         })
-
-        ant.keepInBounds(WIDTH,HEIGHT);
-        ant.update(antList);
-        if(ant.energy <= 0)
-        {
-            antList.splice(aIndex,1);
-        }
-    })
-    count++;
+        count++;
+    }
 }
 
 function main()

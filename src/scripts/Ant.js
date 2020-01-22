@@ -3,7 +3,7 @@ import Tools from "./Tools.js";
 
 export default class Ant
 {
-    constructor(p,v,e,c,ms = 0.5, ec=0.2,rop=10,sf=0.01, mr=0.1)
+    constructor(p,v,e,c,ms = 0.5, ec=0.2,rop=10,sf, mr)
     {
         this._timeAlive = 0;
         this._position = p;
@@ -30,7 +30,7 @@ export default class Ant
         {
             if(this._size < 3)
             {
-                this._size += 0.00001 * this._timeAlive;
+                this._size += 0.0001 * this._timeAlive;
             }
             
             ctx.strokeStyle = `rgba(${this._colour[0]},${this._colour[1]},${this.colour[2]},${(this._energy/this._initialEnergy)-0.3})`;
@@ -49,7 +49,7 @@ export default class Ant
             this._position.add(this._velocity);
             this._acceleration.scale(0);
 
-            this._shouldReproduce = (Math.random() * 100 < 1) ? true : false;
+            this._shouldReproduce = (Math.random() * 100 < 3) ? true : false;
             if(this._shouldReproduce && this._timeAlive > 60) this.reproduce(antList);
 
             this._energy-=this._consumption;
@@ -67,12 +67,10 @@ export default class Ant
 
                 if(dist > 0 && dist <= 5 && ant != this)
                 {
-                    let thisGenome = [new Vector(this._position.x, this._position.y), new Vector(this._velocity.x, this._velocity.y), [this._trueColour[0], this._trueColour[1], this._trueColour[2]], this._maxSpeed , this._consumption, this._rop, this._steeringForce],
-                        otherGenome = [new Vector(ant.position.x, ant.position.y), new Vector(ant.velocity.x, ant.velocity.y), [ant.trueColour[0], ant.trueColour[1], ant.trueColour[2]], ant.maxSpeed, ant.consumption, ant.rop, ant.steeringForce],
-                        midPoint = Tools.randNumFloor(0,8);
-                    let childGenome = this.crossover(thisGenome, otherGenome, midPoint);
+                    let midPoint = Tools.randNumFloor(0,this.genome.length);   
+                    let childGenome = this.crossover(this.genome, ant.genome, midPoint);
                     if(Math.random() * 100 <= this._mutationRate * 100) this.mutate(childGenome);
-                    let newAnt = new Ant(childGenome[0], childGenome[1], 200, childGenome[2], childGenome[3], childGenome[4], childGenome[5], childGenome[6], this._mutationRate);
+                    let newAnt = new Ant(childGenome[0], childGenome[1], childGenome[2], childGenome[3], childGenome[4], childGenome[5], childGenome[6], childGenome[7], this._mutationRate);
                     antList.push(newAnt);
                     reproduced = true;
                 }
@@ -99,12 +97,13 @@ export default class Ant
         return newGenome;
     }
 
-    /* 8 GENES THAT CAN MUTATE MUTATION
+    /* 8 GENES THAT CAN MUTATE
     Velocity,
-    TrueColour (R,G and B individually)
-    Max Speed
-    Energy Consumption
-    Radius of Perception
+    Initial Energy,
+    TrueColour (R,G and B individually),
+    Max Speed,
+    Energy Consumption,
+    Radius of Perception,
     Steering Force
     */
 
@@ -114,26 +113,30 @@ export default class Ant
         let indexes = [];
         for(let i=0; i<num; i++)
         {
-            indexes.push(Math.floor(Math.random() * 8));
+            indexes.push(Math.floor(Math.random() * 9));
         }
         indexes.forEach(i => {
             switch (i)
             {
-                case 1: //Initial Velocity
+                case 1: //Initial Velocity Mutation: Random Unit Vector
                     genome[i] = Vector.UnitVec();
                 break;
 
-                case 2: //True Colour
-                    genome[i] = Tools.randRGB();
+                case 2: //Initial Energy Mutation: +/- 10% of parents initial energy 
+                    genome[i] +=  (0.1*genome[i])*((Math.floor((Math.random() * 2)) > 0) ? 1 : -1);
+                    console.log(genome[i]);
                 break;
-                case 3: //Max Speed
-                case 4: //Energy Consumption
+                case 3: //True Colour Mutation: Random
+                    genome[i] = Tools.mutatedRGB(genome[i][0], genome[i][1], genome[i][2]);
+                break;
+                case 4: //Max Speed
+                case 5: //Energy Consumption
                     genome[i] = Math.random();
                 break;
-                case 5: //Radius of Perception
-                    genome[i] = Math.random() * 20;
+                case 6: //Radius of Perception
+                    genome[i] = Math.random() * 500;
                 break;
-                case 6: //Steering Force
+                case 7: //Steering Force
                     genome[i] = Math.random();
                 break;
             }
@@ -185,7 +188,6 @@ export default class Ant
                 dir.scale(this._maxSpeed);
                 let steer = Vector.Sub(dir, this._velocity);
                 steer.constrain(this._steeringForce);
-                steer.normalise();
                 this.addForce(steer);
             }
         }
@@ -205,6 +207,11 @@ export default class Ant
     addForce(f)
     {
         this._acceleration.add(f);
+    }
+
+    get genome()
+    {
+        return [new Vector(this._position.x, this._position.y), new Vector(this._velocity.x, this._velocity.y),this._initialEnergy, [this._trueColour[0], this._trueColour[1], this._trueColour[2]], this._maxSpeed , this._consumption, this._rop, this._steeringForce];
     }
 
     get position()
@@ -235,6 +242,11 @@ export default class Ant
     get shouldReproduce()
     {
         return this._shouldReproduce;
+    }
+
+    get initialEnergy()
+    {
+        return this._initialEnergy;
     }
 
     get energy()
