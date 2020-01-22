@@ -91,7 +91,7 @@ export default class Agent
                 tot++;
                 avgVel.add(agentList[agent].velocity);
             }
-            if(tot>0)
+            if(tot > 0)
             {
                 avgVel.scale(1/tot);
                 let targetVelocity = Vector.Scale(Vector.Normalise(avgVel),this._maxSpeed),
@@ -106,7 +106,27 @@ export default class Agent
 
     cohesion(agentList) //cohesion
     {
+        let tot = 0,
+            avgPos = new Vector(0,0);
+        for(agent in agentList)
+        {
+            let dir = Vector.Sub(agentList[agent].position, this._position),
+                dist = dir.mag;
+            if(dist<this._rop && dist>0)
+            {
+                avgPos.add(agentList[agent].position);
+                tot++;
+            }
+        }
+        if(tot > 0)
+        {
+            avgPos.scale(1/tot);
+            let targetVelocity = Vector.Scale(Vector.Normalise(Vector.Sub(avgPos, this.position)), this._maxSpeed),
+                steeringForce = Vector.Sub(targetVelocity, this._velocity);
 
+                steeringForce.constrain(this._steeringForce);
+                this.addForce(steeringForce);
+        }
     }
 
     //Changing colour based on food eaten
