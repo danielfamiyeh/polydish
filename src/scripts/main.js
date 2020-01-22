@@ -25,16 +25,16 @@ canvas.addEventListener("mousedown", function(e){
 ctx.canvas.width = WIDTH;
 ctx.canvas.height = HEIGHT;
 
-for(let i=0; i<50; i++)
+for(let i=0; i<100; i++)
 {
     foodList.push(new Food(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Tools.randRGB()));
 }
 
 let s = new Square(new Vector(50,50), Vector.UnitVec(), 200, Tools.randRGB(), 1, 0.2,20,0.5,0.01);
 
-for(let i=0; i<170; i++)
+for(let i=0; i<250; i++)
 {
- //   antList.push(new Circle(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), Math.random() * 200, Tools.randRGB(), Math.random(), Math.random(), Math.random() * 30, Math.random() * 0.09, Math.random() * 10));
+    antList.push(new Circle(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), Math.random() * 500, Tools.randRGB(), Math.random(), Math.random(), Math.random() * WIDTH/10, Math.random() * 0.09, Math.random() * 10));
 }
 antList.push(s);
 
@@ -51,7 +51,7 @@ function render()
 
 function update()
 {
-    if(count < 550)
+    if(count < 700) //make generation length variable
         {
         if(foodList.length<50)
         {

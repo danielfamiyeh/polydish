@@ -31,10 +31,13 @@ export default class Agent
         this._size = 0.001;
         this._steeringForce = sf;
         this._mutationRate = mr;
+        this._shouldSwarm = true;
     }
 
     update(antList)
     {
+        if(this._shouldSwarm) this.swarm(antList);
+
         if(this._energy > 0)
         {
             this._velocity.add(this._acceleration);
@@ -42,7 +45,7 @@ export default class Agent
             this._position.add(this._velocity);
             this._acceleration.scale(0);
 
-            this._shouldReproduce = (Math.random() * 100 < 3) ? true : false;
+            this._shouldReproduce = (Math.random() * 100 < 50) ? true : false;
             if(this._shouldReproduce && this._timeAlive > 60) this.reproduce(antList);
 
             this._energy-=this._consumption;
@@ -69,6 +72,39 @@ export default class Agent
         }
     }
 
+    //Swarm Mechanics - Make Variable
+    swarm(agentList)
+    {
+        this.align(agentList);
+    }
+
+    align(agentList) //alignment
+    {
+        for(let agent in agentList)
+        {
+            let dir = Vector.Sub(agentList[agent].position, this._position),
+                dist = dir.mag;
+            if(dist<this._rop && dist>0)
+            {
+                let targetVelocity = Vector.Scale(Vector.Normalise(dir),this._maxSpeed),
+                    steeringForce = Vector.Sub(targetVelocity, this.velocity);
+                
+                steeringForce.constrain(this._steeringForce);
+                steeringForce.scale(0.3);
+                this.addForce(steeringForce);
+            }
+        }
+    }
+
+    cohesion(agentList) //cohesion
+    {
+        for(agent in agentList)
+        {
+
+        }
+    }
+
+    //Changing colour based on food eaten
     changeColour(food)
     {
         let deltaR = (food.colour[0] - this._colour[0]) / 10,
@@ -80,11 +116,13 @@ export default class Agent
         this._colour[2] += deltaB;
     }
     
+    //Adding forces to movement
     addForce(f)
     {
         this._acceleration.add(f);
     }
 
+    //Keep agent in screen
     keepInBounds(WIDTH, HEIGHT)
     {
         if(this._position.x <= 0)
@@ -121,8 +159,7 @@ export default class Agent
 
     reproduce(antList)
     {
-        let reproduced = false;
-        if(antList.length < 100)
+        if(antList.length < 300) //make max ants variable
         {
             antList.forEach(ant => {
                 let dist = Vector.Sub(ant.position, this._position).mag;
@@ -134,18 +171,12 @@ export default class Agent
                     if(Math.random() * 100 <= this._mutationRate * 100) this.mutate(childGenome);
                     let newAnt = new Circle(childGenome[0], childGenome[1], childGenome[2], childGenome[3], childGenome[4], childGenome[5], childGenome[6], childGenome[7], this._mutationRate);
                     antList.push(newAnt);
-                    reproduced = true;
+                    this._energy-=50;
                 }
             })
-            if(!reproduced)
-            {
-            //    antList.push(new Ant(new Vector(this._position.x, this._position.y), new Vector(this._velocity.x, this._velocity.y), 200, this._trueColour, this._maxSpeed));
-                reproduced = true;
-            }
         }
     }
 
-    //Chromosonal crossover function
     crossover(g1, g2, m)
     {
         let newGenome = []
@@ -160,26 +191,26 @@ export default class Agent
         return newGenome;
     }
 
-    //Genetic Mutation Function
+
    mutate(genome)
    {
        let num = Math.floor(Math.random() * genome.length + 1); //Number of genes to mutate
        let indexes = [];
        for(let i=0; i<num; i++)
        {
-           indexes.push(Math.floor(Math.random() * 9));
+           indexes.push(Math.floor(Math.random() * 9)); //Gene indexes to mutate
        }
        indexes.forEach(i => {
            switch (i)
            {
-               case 1: //Initial Velocity Mutation: Random Unit Vector
+               case 1: //Initial Velocity Mutation
                    genome[i] = Vector.UnitVec();
                break;
 
-               case 2: //Initial Energy Mutation: +/- 10% of parents initial energy 
+               case 2: //Initial Energy Mutation
                    genome[i] +=  (0.1*genome[i])*((Math.floor((Math.random() * 2)) > 0) ? 1 : -1);
                break;
-               case 3: //True Colour Mutation: Random
+               case 3: //True Colour Mutation
                    genome[i] = Tools.mutatedRGB(genome[i][0], genome[i][1], genome[i][2]);
                break;
                case 4: //Max Speed

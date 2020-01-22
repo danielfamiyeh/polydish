@@ -15,7 +15,7 @@ export default class Square extends Agent
                     this._size += 0.0001 * this._timeAlive;
                 }
             ctx.strokeStyle = `rgba(${this._colour[0]},${this._colour[1]},${this._colour[2]},${(this._energy/this._initialEnergy)-0.3})`;
-            ctx.strokeRect(this._position.x, this._position.y, this._size*10, this._size*10);
+            ctx.strokeRect(this._position.x, this._position.y, this._size, this._size);
         }
     }
 }
