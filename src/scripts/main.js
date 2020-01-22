@@ -1,4 +1,4 @@
-import Ant from "./Ant.js";
+import Circle from "./Circle.js";
 import Vector from "./Vector.js";
 import Food from "./Food.js";
 import Tools from "./Tools.js";
@@ -31,7 +31,7 @@ for(let i=0; i<50; i++)
 
 for(let i=0; i<170; i++)
 {
-    antList.push(new Ant(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), Math.random() * 200, Tools.randRGB(), Math.random(), Math.random(), Math.random() * 30, Math.random() * 0.09, Math.random() * 10));
+    antList.push(new Circle(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), Math.random() * 200, Tools.randRGB(), Math.random(), Math.random(), Math.random() * 30, Math.random() * 0.09, Math.random() * 10));
 }
 
 function render()
