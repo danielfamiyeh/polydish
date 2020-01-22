@@ -28,7 +28,7 @@ export default class Agent
         this._consumption = ec;
         this._shouldReproduce = false;
         this._rop = rop;
-        this._size = 0.001;
+        this._size = 0.01;
         this._steeringForce = sf;
         this._mutationRate = mr;
         this._shouldSwarm = true;
@@ -80,17 +80,25 @@ export default class Agent
 
     align(agentList) //alignment
     {
+        let tot = 0,
+            avgVel = new Vector(0,0);
         for(let agent in agentList)
         {
             let dir = Vector.Sub(agentList[agent].position, this._position),
                 dist = dir.mag;
             if(dist<this._rop && dist>0)
             {
-                let targetVelocity = Vector.Scale(Vector.Normalise(dir),this._maxSpeed),
+                tot++;
+                avgVel.add(agentList[agent].velocity);
+            }
+            if(tot>0)
+            {
+                avgVel.scale(1/tot);
+                let targetVelocity = Vector.Scale(Vector.Normalise(avgVel),this._maxSpeed),
                     steeringForce = Vector.Sub(targetVelocity, this.velocity);
                 
                 steeringForce.constrain(this._steeringForce);
-                steeringForce.scale(0.3);
+                steeringForce.scale(0.01);
                 this.addForce(steeringForce);
             }
         }
@@ -98,10 +106,7 @@ export default class Agent
 
     cohesion(agentList) //cohesion
     {
-        for(agent in agentList)
-        {
 
-        }
     }
 
     //Changing colour based on food eaten
@@ -159,7 +164,7 @@ export default class Agent
 
     reproduce(antList)
     {
-        if(antList.length < 300) //make max ants variable
+        if(antList.length < 150) //make max ants variable
         {
             antList.forEach(ant => {
                 let dist = Vector.Sub(ant.position, this._position).mag;

@@ -11,7 +11,7 @@ export default class Circle extends Agent
     {
         if(this._energy > 0)
         {
-            if(this._size < 3)
+            if(this._size < 0.2)
             {
                 this._size += 0.0001 * this._timeAlive;
             }
