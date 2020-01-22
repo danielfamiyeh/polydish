@@ -1,5 +1,3 @@
-import Vector from "./Vector.js";
-import Tools from "./Tools.js";
 import Agent from "./Agent.js";
 
 export default class Circle extends Agent
