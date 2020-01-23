@@ -1,8 +1,9 @@
-import Circle from "./Circle.js";
-import Vector from "./Vector.js";
-import Food from "./Food.js";
-import Tools from "./Tools.js";
-import Square from "./Square.js";
+import Circle from "./classes/Circle.js";
+import Vector from "./classes/Vector.js";
+import Food from "./classes/Food.js";
+import Tools from "./classes/helper/Tools.js";
+import Square from "./classes/Square.js";
+import SpinSquare from "./classes/SpinSquare.js";
 
 let canvas = document.getElementById("canvas"),
     ctx = canvas.getContext("2d"),
@@ -32,14 +33,14 @@ for(let i=0; i<100; i++)
 
 let s = new Square(new Vector(50,50), Vector.UnitVec(), 200, Tools.randRGB(), 1, 0.2,20,0.5,0.01);
 
-for(let i=0; i<50; i++)
+for(let i=0; i<90; i++)
 {
     antList.push(new Circle(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), Math.random() * 500, Tools.randRGB(), Math.random(), Math.random(), Math.random() * WIDTH/10, Math.random() * 0.07, Math.random() * 10));
-//    antList[i].shouldSwarm = (Math.floor(Math.random() * 2) > 0) ? true : false;
     antList.push(new Square(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), Math.random() * 500, Tools.randRGB(), Math.random(), Math.random(), Math.random() * WIDTH/10, Math.random() * 0.07, Math.random() * 10));
+    if((Math.floor(Math.random() * 2))>0)antList.push(new SpinSquare(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), Math.random() * 500, Tools.randRGB(), Math.random(), Math.random(), Math.random() * WIDTH/10, Math.random() * 0.07, Math.random() * 10, Math.random()));
 }
 antList.push(s);
-console.log(antList[3].constructor===antList[1].constructor);
+console.log(antList[3].constructor);
 
 function render()
 {
@@ -54,7 +55,7 @@ function render()
 
 function update()
 {
-    if(count < 700) //make generation length variable
+    if(count < 1500) //make generation length variable
         {
         if(foodList.length<50)
         {

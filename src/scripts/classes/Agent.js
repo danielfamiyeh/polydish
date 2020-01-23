@@ -1,6 +1,6 @@
 //Abstract Agent Class
 import Vector from "./Vector.js";
-import Tools from "./Tools.js";
+import Tools from "./helper/Tools.js";
 import Circle from "./Circle.js";
 export default class Agent
 {
@@ -32,6 +32,7 @@ export default class Agent
         this._steeringForce = sf;
         this._mutationRate = mr;
         this._shouldSwarm = true;
+        this._faceHeading = true;
     }
 
     update(antList)
@@ -87,7 +88,7 @@ export default class Agent
         {
             let dir = Vector.Sub(agentList[agent].position, this._position),
                 dist = dir.mag;
-            if(dist<this._rop && dist>0)
+            if(dist<this._rop && dist>0 && agentList[agent].constructor === this.constructor)
             {
                 tot++;
                 avgVel.add(agentList[agent].velocity);
@@ -113,7 +114,7 @@ export default class Agent
         {
             let dir = Vector.Sub(agentList[agent].position, this._position),
                 dist = dir.mag;
-            if(dist<this._rop && dist>0)
+            if(dist<this._rop && dist>0 && this.constructor === agentList[agent].constructor)
             {
                 avgPos.add(agentList[agent].position);
                 tot++;
@@ -259,6 +260,11 @@ export default class Agent
     get genome()
     {
         return [new Vector(this._position.x, this._position.y), new Vector(this._velocity.x, this._velocity.y),this._initialEnergy, [this._trueColour[0], this._trueColour[1], this._trueColour[2]], this._maxSpeed , this._consumption, this._rop, this._steeringForce];
+    }
+
+    get heading()
+    {
+        return Vector.Normalise(this.velocity);
     }
 
     get position()

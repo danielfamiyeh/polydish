@@ -1,4 +1,4 @@
-import Tools from "./Tools.js";
+import Tools from "./helper/Tools.js";
 
 export default class Vector
 {

@@ -1,4 +1,7 @@
+Rotating Squares
+    - Rotating Squares being related to normal squares.
 Initial Variable Choice
+    - Shapes initial max size
 Swarm Mechanic Sliders
 Only Swarm with Shape
 'HUD'
@@ -6,3 +9,5 @@ Only Swarm with Shape
     - Tiny Health Bar
     - Number
     - Parent's Number
+Path Following
+Remove Default Values in Constructors
