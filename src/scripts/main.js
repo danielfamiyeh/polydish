@@ -5,8 +5,8 @@ import Tools from "./classes/helper/Tools.js";
 import Square from "./classes/Square.js";
 import SpinSquare from "./classes/SpinSquare.js";
 
-const WIDTH = 500,
-    HEIGHT = 500;
+const WIDTH = window.innerWidth,
+    HEIGHT = window.innerHeight;
 
 let canvas = document.getElementById("canvas"),
     ctx = canvas.getContext("2d"),
@@ -18,10 +18,9 @@ let canvas = document.getElementById("canvas"),
     shouldRefresh,
     nFrames = 1;
 
-
 canvas.addEventListener("mousedown", function(e){
     canvas.toBlob(function(blob) {
-        saveAs(blob, "pretty image.png");
+       // saveAs(blob, "polydish.png");
     });
     target.x = e.clientX;
     target.y = e.clientY;
@@ -38,50 +37,87 @@ canvas.addEventListener("keyup", function(e){
 ctx.canvas.width = WIDTH;
 ctx.canvas.height = HEIGHT;
 
+let genLength = 500,
+    maxFood = 50;
+
+//Circle inital max values
+let initialEnergyCirc = 500,
+baselineRGBCirc = Tools.randRGB(),
+maxSpeedCirc = 10,
+energyConsumptionCirc = 0.2,
+radOfPercepCirc = 30,
+maxSteeringForceCirc = 0.7,
+maxMutationRateCirc = 0.3,
+maxSizeCirc = 3;
+
+//Square initial max values
+let initialEnergySq = 500,
+    baselineRGBSq = Tools.randRGB(),
+    maxSpeedSq = 10,
+    energyConsumptionSq = 0.2,
+    radOfPercepSq = 30,
+    maxSteeringForceSq = 0.5,
+    maxMutationRateSq = 0.3,
+    maxSizeSqr = 1.5;
 
 
-for(let i=0; i<50; i++)
+//Spin Square initial max values
+let initialEnergySSq = 500,
+    baselineRGBSSq = Tools.randRGB(),
+    maxSpeedSSq = 10,
+    maxSteeringForceSSq = 0.2,
+    maxMutationRateSSq = 0.3,
+    energyConsumptionSSq = 0.2,
+    radOfPercepSSq = 30,
+    maxSizeSSqr = 2,
+    dTheta = Math.random();
+
+function getCircMax()
+{
+    return [initialEnergyCirc, baselineRGBCirc, maxSpeedCirc,energyConsumptionCirc,
+        radOfPercepCirc,maxSteeringForceCirc,maxMutationRateCirc];
+}
+
+function getSquareMax()
+{
+    return [initialEnergySq, baselineRGBSq, maxSpeedSq, energyConsumptionSq,
+        radOfPercepSq,maxSteeringForceSq,maxMutationRateSq];
+}
+
+function getSpinSquareMax()
+{
+    return [initialEnergySSq, baselineRGBSSq, maxSpeedSSq, energyConsumptionSSq,
+        radOfPercepSSq,maxSteeringForceSSq,maxMutationRateSSq];
+}
+
+let circList = Circle.genCircles(20, WIDTH,HEIGHT,getCircMax()),
+    squareList = Square.genSquares(20,WIDTH,HEIGHT,getSquareMax()),
+    spinSquareList = SpinSquare.genSquares(20,WIDTH,HEIGHT,getSpinSquareMax());
+
+circList.forEach(c=>antList.push(c));
+squareList.forEach(s=>antList.push(s));
+spinSquareList.forEach(ss => antList.push(ss));
+
+
+for(let i=0; i<1; i++)
 {
     foodList.push(new Food(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Tools.randRGB()));
 }
 
-let s = new Square(new Vector(50,50), Vector.UnitVec(), 200, Tools.randRGB(), 1, 0.2,20,0.5,0.01);
-
-for(let i=0; i<20; i++)
-{
-    antList.push(new Circle(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), Math.random() * 500, Tools.mutatedRGB(25,255,255), Math.random() * 5, Math.random(), Math.random() * WIDTH/10, Math.random() * 0.07, Math.random() * 10));
-    antList.push(new Square(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), Math.random() * 500, Tools.mutatedRGB(255,165,0), Math.random()*5, Math.random(), Math.random() * WIDTH/10, Math.random() * 0.07, Math.random() * 10));
-    if((Math.floor(Math.random() * 2))>0)antList.push(new SpinSquare(new Vector(Tools.randNum(0,WIDTH), Tools.randNum(0,HEIGHT)), Vector.UnitVec(), Math.random() * 500, Tools.mutatedRGB(25,255,), Math.random() * 5, Math.random(), Math.random() * WIDTH/10, Math.random() * 0.07, Math.random() * 10, Math.random()));
-}
-antList.push(s);
-console.log(antList[3].constructor);
-
 
 function render()
 {   
-
     if(shouldRefresh) if(count % nFrames === 0)ctx.clearRect(0,0,WIDTH,HEIGHT);
-    if(count%1===0)
-    {
-        antList.forEach(ant => ant.render(ctx,WIDTH,HEIGHT));
-    }
-
-    //foodList.forEach(food => food.render(ctx));
+    antList.forEach(ant => ant.render(ctx,WIDTH,HEIGHT));
 }
 
 ctx.fillStyle="#000000";
     ctx.fillRect(0,0,WIDTH,HEIGHT);
 function update()
 {
-    if(keys[32])
-    {
-        canvas.toBlob(function(blob) {
-    //saveAs(blob, "pretty image.png");
-});
-    }
-    if(count < 500) //make generation length variable
+    if(count < genLength) //make generation length variable
         {
-        if(foodList.length<50)
+        if(foodList.length<maxFood)
         {
             for(let i=0; i<50;i++) foodList.push(new Food(new Vector(Math.random() * WIDTH, Math.random()*HEIGHT),Tools.randRGB()));
         }
