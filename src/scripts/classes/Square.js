@@ -37,7 +37,7 @@ export default class Square extends Agent
             }
             ctx.save();
             Tools.rotate(ctx,this, Math.atan2(this.heading.y,this.heading.x));
-            ctx.strokeStyle = `rgba(${this._colour[0]},${this._colour[1]},${this._colour[2]},${0.3*(this._energy/this._initialEnergy)})`;
+            ctx.strokeStyle = `rgba(${this._colour[0]},${this._colour[1]},${this._colour[2]},${(this._energy/this._initialEnergy)})`;
             ctx.strokeRect(this._position.x, this._position.y, this._size, this._size);
             ctx.restore();
         }

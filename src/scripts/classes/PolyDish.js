@@ -1,4 +1,3 @@
-import Dimension from "./helper/Dimension.js";
 import Tools from "./helper/Tools.js";
 import Circle from "./Circle.js";
 import Square from "./Square.js";
@@ -42,10 +41,10 @@ steeringForce, mutationRate, maxSize + dTheta for SpinSquare
             this._screenSize.h, this._circInitVals);
         
         this._squareList = Square.genSquares(numSquare,this._screenSize.w,
-                this._screenSize.h, this._circInitVals);
+                this._screenSize.h, this._squareInitVals);
 
         this._spinSquareList = SpinSquare.genSpinSquares(numSpinSquare,this._screenSize.w,
-            this._screenSize.h, this._circInitVals);
+            this._screenSize.h, this._spinSquareInitVals);
 
         this._circList.forEach(c => this._speciesList.push(c));
         this._squareList.forEach(s => this._speciesList.push(s));
@@ -55,15 +54,13 @@ steeringForce, mutationRate, maxSize + dTheta for SpinSquare
 
         this._maxFood = maxFood;
         
-        this._stopAfter = stopAfter
+        this._stopAfter = stopAfter;
     }
 
     run(nFrames)
     {
         this.render(nFrames)
         this.update();
-
-        console.log("r");
     }
 
     render(nFrames=1)
@@ -116,6 +113,26 @@ steeringForce, mutationRate, maxSize + dTheta for SpinSquare
             });
         this._frameCount++;
         }
+    }
+
+    get circInitVals()
+    {
+        return this._circInitVals;
+    }
+
+    set circInitVals(vals)
+    {
+        this._circInitVals = vals;
+    }
+
+    set squareInitVals(vals)
+    {
+        this._squareInitVals = vals;
+    }
+
+    set sSquareInitVals(vals)
+    {
+        this._sSquareInitVals = vals;
     }
 
     set bgCol(colour)
