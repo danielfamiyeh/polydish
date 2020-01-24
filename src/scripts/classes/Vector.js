@@ -41,6 +41,16 @@ export default class Vector
         return new Vector(v.x / v.mag, v.y / v.mag);
     }
 
+    static Mag(v)
+    {
+        return Math.sqrt(v.x ** 2 + v.y ** 2);
+    }
+
+    static Dist(v1, v2)
+    {
+        return Vector.Mag(Vector.Sub(v1, v2));
+    }
+
     add(v)
     {
         this._x += v.x;

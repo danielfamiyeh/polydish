@@ -9,18 +9,6 @@ export default class Circle extends Agent
         super(pos, vel, energy, col, maxspeed, energconsump, rop, steer, mutrate);
     }
 
-    /*
-//Circle inital max values
-let initialEnergyCirc = 500,
-baselineRGBCirc = Tools.mutatedRGB(230,230,230),
-maxSpeedCirc = 10,
-energyConsumptionCirc = 0.2,
-radOfPercepCirc = 30;
-maxSteeringForceCirc = 0.7
-maxMutationRateCirc = 0.3,
-,*/
-
-
     static genCircles(amount, width, height, maxVals)
     {
         let list = [];

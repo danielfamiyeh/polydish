@@ -11,7 +11,7 @@ export default class SpinSquare extends Agent
         this._dTheta = dt
     }
 
-    static genSquares(amount, width, height, maxVals)
+    static genSpinSquares(amount, width, height, maxVals)
     {
         let list = [];
         for(let i=0; i<amount; i++)

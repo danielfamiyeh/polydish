@@ -1,3 +1,5 @@
+import Tools from "./helper/Tools.js";
+import Vector from "./Vector.js";
 export default class Food
 {
     constructor(pos, col)
@@ -5,6 +7,16 @@ export default class Food
         this._position = pos;
         this._eaten = false;
         this._colour = col;
+    }
+
+    static genFood(size, num)
+    {
+        let foodList = new Array(num);
+        for(let i = 0; i< num; i++)
+        {
+           foodList[i] = (new Food(new Vector(Math.random() * size.w, Math.random() * size.h), Tools.randRGB()));
+        }
+        return foodList;
     }
 
     render(ctx)

@@ -7,7 +7,6 @@ export default class Square extends Agent
     constructor(pos, vel, energy, col, maxspeed, energconsump, rop, steer, mutrate)
     {
         super(pos, vel, energy, col, maxspeed, energconsump, rop, steer, mutrate);
-        this._angle = 0;
     }
 
     static genSquares(amount, width, height, maxVals)
