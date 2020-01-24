@@ -47,7 +47,7 @@ export default class Agent
             this._acceleration.scale(0);
 
             this._shouldReproduce = (Math.random() * 100 < 50) ? true : false;
-            if(this._shouldReproduce && this._timeAlive > 60) this.reproduce(antList);
+            if(this._shouldReproduce && this._timeAlive > 250) this.reproduce(antList);
 
             this._energy-=this._consumption;
             this._timeAlive++;
@@ -135,9 +135,9 @@ export default class Agent
     //Changing colour based on food eaten
     changeColour(food)
     {
-        let deltaR = (food.colour[0] - this._colour[0]) / 10,
-            deltaG = (food.colour[1] - this._colour[1]) / 10,
-            deltaB = (food.colour[2] - this._colour[2]) / 10;
+        let deltaR = (food.colour[0] - this._colour[0]) / 2,
+            deltaG = (food.colour[1] - this._colour[1]) / 2,
+            deltaB = (food.colour[2] - this._colour[2]) / 2;
 
         this._colour[0] += deltaR;
         this._colour[1] += deltaG;
