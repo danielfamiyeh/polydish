@@ -10,9 +10,7 @@ let canvas = document.getElementById("canvas");
  */
 
 let dish = new PolyDish(canvas, new Dimension(window.innerWidth,window.innerHeight));
-
-dish.initSpecies(30,30,30,10,50,500);
-
+dish.initSpecies(30,30,30,100,50,500);
 
 
 function main()

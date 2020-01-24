@@ -48,7 +48,7 @@ export default class Vector
 
     static Dist(v1, v2)
     {
-        return Vector.Mag(Vector.Sub(v1, v2));
+        return Vector.Mag(Vector.Sub(v2, v1));
     }
 
     add(v)

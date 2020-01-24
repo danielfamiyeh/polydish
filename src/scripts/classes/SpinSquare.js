@@ -4,11 +4,11 @@ import Vector from "./Vector.js";
 
 export default class SpinSquare extends Agent
 {
-    constructor(p,v,e,c,ms = 0.5, ec=0.2,rop=10,sf, mr,dt)
+    constructor(pos, vel, energy, col, maxSpeed, energyConsump, radOfPercep, steerForce, mutrate, dTheta)
     {
-        super(p,v,e,c,ms, ec,rop,sf, mr);
+        super(pos, vel, energy, col, maxSpeed, energyConsump, radOfPercep, steerForce, mutrate);
         this._angle = 0;
-        this._dTheta = dt
+        this._dTheta = dTheta
     }
 
     static genSpinSquares(amount, width, height, maxVals)
@@ -39,7 +39,7 @@ export default class SpinSquare extends Agent
             }
             ctx.save()
                 Tools.rotate(ctx,this,this._angle);
-                ctx.strokeStyle = `rgba(${this._colour[0]},${this._colour[1]},${this._colour[2]},${(this._energy/this._initialEnergy)})`;
+                ctx.strokeStyle = `rgba(${this._colour[0]},${this._colour[1]},${this._colour[2]},${(0.55*this._energy/this._initialEnergy)})`;
                 ctx.strokeRect(this._position.x, this._position.y, this._size, this._size);
             ctx.restore();
             this._angle += this._dTheta;

@@ -91,14 +91,15 @@ steeringForce, mutationRate, maxSize + dTheta for SpinSquare
                 {
                     if(f != null)
                     {
-                        if(Vector.Dist(s.position, f.position) < f.rop)
+                        let dist = Vector.Dist(s.position, f.position);
+                        if(dist < s.rop)
                         {
                             s.seek(f.position)
-                            if(dist < 1 && !f.eaten)
+                            if(dist < 1)
                             {
+                                s.changeColour(f);
                                 f.eaten = true;
                                 s.energy += 20;
-                                s.changeColour(f);
                                 this._foodList.splice(j,1);
                             }
                         }
