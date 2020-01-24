@@ -116,6 +116,13 @@ steeringForce, mutationRate, maxSize + dTheta for SpinSquare
         }
     }
 
+    saveImage()
+    {
+        this._canvas.toBlob(function(blob) {
+            saveAs(blob, "polydish.png");
+        });
+    }
+
     get circInitVals()
     {
         return this._circInitVals;
@@ -131,9 +138,19 @@ steeringForce, mutationRate, maxSize + dTheta for SpinSquare
         this._squareInitVals = vals;
     }
 
-    set sSquareInitVals(vals)
+    set spinSquareInitVals(vals)
     {
-        this._sSquareInitVals = vals;
+        this._spinSquareInitVals = vals;
+    }
+
+    get squareInitVals()
+    {
+        return this._squareInitVals;
+    }
+
+    get spinSquareInitVals()
+    {
+        return this._spinSquareInitVals;
     }
 
     set bgCol(colour)

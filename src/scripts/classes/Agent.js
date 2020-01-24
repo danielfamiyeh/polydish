@@ -136,9 +136,9 @@ export default class Agent
     changeColour(food)
     {
         console.log("chagning");
-        let deltaR = (food.colour[0] - this._colour[0]) / 2,
-            deltaG = (food.colour[1] - this._colour[1]) / 2,
-            deltaB = (food.colour[2] - this._colour[2]) / 2;
+        let deltaR = (food.colour[0] - this._colour[0])/1.5,
+            deltaG = (food.colour[1] - this._colour[1])/1.5,
+            deltaB = (food.colour[2] - this._colour[2])/1.5;
 
         this._colour[0] += deltaR;
         this._colour[1] += deltaG;

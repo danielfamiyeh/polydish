@@ -3,13 +3,18 @@
 
 <head>
     <style>
-        body
-        {
-            display: inline-block;
-        }
         canvas
         {
             border: 1px solid #000000;
+            z-index: 0;
+        }
+
+        #saveBtn
+        {
+            z-index: 3;
+            position: absolute;
+            top: 2vh;
+            left: 1vw;
         }
     </style>
 </head>
@@ -18,5 +23,6 @@
     <script src="scripts/classes/helper/FileSaver.js"></script>
     <canvas id="canvas"></canvas>
     <script type="module" src = "scripts/main.js"></script>
+    <button id="saveBtn">Save</button>
 </body>
 </html>
