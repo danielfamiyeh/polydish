@@ -33,7 +33,7 @@ export default class SpinSquare extends Agent
     {
         if(this._energy>0)
         {
-            if(this._size < 0.01 * (WIDTH/2))
+            if(this._size < 0.01 * (WIDTH/4))
             {
                 this._size += 0.01 * this._timeAlive;
             }

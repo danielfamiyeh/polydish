@@ -136,9 +136,9 @@ export default class Agent
     changeColour(food)
     {
         console.log("chagning");
-        let deltaR = (food.colour[0] - this._colour[0])/1.5,
-            deltaG = (food.colour[1] - this._colour[1])/1.5,
-            deltaB = (food.colour[2] - this._colour[2])/1.5;
+        let deltaR = (food.colour[0] - this._colour[0])/2,
+            deltaG = (food.colour[1] - this._colour[1])/2,
+            deltaB = (food.colour[2] - this._colour[2])/2;
 
         this._colour[0] += deltaR;
         this._colour[1] += deltaG;
@@ -159,6 +159,7 @@ export default class Agent
             let target = new Vector(this._maxSpeed, this._velocity.y),
             steer = Vector.Sub(target, this._velocity);
             steer.constrain(this._steeringForce);
+            steer.scale(0.5);
             this.addForce(steer);
         }
         if(this._position.x >= WIDTH)
@@ -166,20 +167,23 @@ export default class Agent
             let target = new Vector(-this._maxSpeed, this._velocity.y),
             steer = Vector.Sub(target, this._velocity);
             steer.constrain(this._steeringForce);
+            steer.scale(0.5);
             this.addForce(steer);
         }
         if(this._position.y <= 0)
         {
-            let target = new Vector(this._maxSpeed, this._velocity.y),
+            let target = new Vector(this._velocity.x, this._maxSpeed),
             steer = Vector.Sub(target, this._velocity);
             steer.constrain(this._steeringForce);
+            steer.scale(0.5);
             this.addForce(steer);
         }
         if(this._position.y >= HEIGHT)
         {
-            let target = new Vector(-this._maxSpeed, this._velocity.y),
+            let target = new Vector(this._velocity.x, -this._maxSpeed),
             steer = Vector.Sub(target, this._velocity);
             steer.constrain(this._steeringForce);
+            steer.scale(0.5);
             this.addForce(steer);
         }
     }

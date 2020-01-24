@@ -28,9 +28,9 @@ steeringForce, mutationRate, maxSize + dTheta for SpinSquare
         this._screenSize = size;
 
         //Initial Max values for species
-        this._circInitVals = [500, Tools.randRGB(), 10, 0.2, 30, 0.7, 0.3, 3];
-        this._squareInitVals = [500, Tools.randRGB(), 10, 0.2, 30, 0.5, 0.3, 1.5];
-        this._spinSquareInitVals = [500, Tools.randRGB(), 10, 0.2, 30, 0.5, 0.3, 1.5, Tools.randNum() * 20];
+        this._circInitVals = [500, Tools.randRGB(), 5, 0.2, 30, 0.09, 0.3, 3];
+        this._squareInitVals = [500, Tools.randRGB(), 5, 0.2, 30, 0.09, 0.3, 1.5];
+        this._spinSquareInitVals = [500, Tools.randRGB(), 4, 0.2, 30, 0.09, 0.3, 1.5, Tools.randNum() * 5];
         this._speciesList = [];
     }
 
@@ -67,9 +67,19 @@ steeringForce, mutationRate, maxSize + dTheta for SpinSquare
     {
         if(this._frameCount < this._stopAfter)
         {
+            this._ctx.beginPath();
+            this._ctx.strokeStyle = "#cccccc";
+            this._ctx.arc(this._screenSize.w/2, this._screenSize.h/2,300,0,2*Math.PI);
+            this._ctx.stroke();
             if(this._frameCount % nFrames === 0)
             {
-                this._speciesList.forEach(s => s.render(this._ctx, this._screenSize.w, this._screenSize.h));
+                this._speciesList.forEach(s => {
+                    let dist = Vector.Dist(new Vector(this._screenSize.w/2, this._screenSize.h/2), s.position);
+                    if(dist < 300)
+                    {
+                        s.render(this._ctx, this._screenSize.w, this._screenSize.h)
+                    }
+                });
             }
         }
     }
