@@ -154,6 +154,17 @@ export default class Agent
     //Keep agent in screen
     keepInBounds(WIDTH, HEIGHT)
     {
+        let dist = Vector.Mag(Vector.Sub(new Vector(WIDTH/2,HEIGHT/2), this._position));
+        if(dist >= HEIGHT/2)
+        {
+            let dir = Vector.Normalise(Vector.Sub(new Vector(WIDTH/2, HEIGHT/2), this._position)),
+                desiredVel = Vector.Scale(dir,this._maxSpeed),
+                steerForce = Vector.Sub(desiredVel, this._velocity);
+
+                steerForce.constrain(0.05*this.maxSpeed);
+                this.addForce(steerForce);
+        }
+        /*
         if(this._position.x <= 0)
         {
             let target = new Vector(this._maxSpeed, this._velocity.y),
@@ -186,6 +197,7 @@ export default class Agent
             steer.scale(0.5);
             this.addForce(steer);
         }
+        */
     }
 
     //Reproductive Functions

@@ -14,7 +14,7 @@ export default class Square extends Agent
         let list = [];
         for(let i=0; i<amount; i++)
         {
-            list.push(new Square(new Vector(Math.random() * width, Math.random() * height),
+            list.push(new Square(new Vector(Math.random() * width + 0.2*width, Math.random() * height),
                                     Vector.UnitVec(),
                                     Math.random() * maxVals[0],
                                     Tools.mutatedRGB(maxVals[1][0], maxVals[1][1], maxVals[1][2]),
@@ -31,7 +31,7 @@ export default class Square extends Agent
     {
         if(this._energy > 0)
         {
-            if(this._size < 0.01 * WIDTH/4)
+            if(this._size < 0.01 * WIDTH/8)
             {
                 this._size += 0.01 * this._timeAlive;
             }

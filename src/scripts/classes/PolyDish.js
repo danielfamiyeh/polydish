@@ -37,13 +37,13 @@ steeringForce, mutationRate, maxSize + dTheta for SpinSquare
     initSpecies(numCirc, numSquare, numSpinSquare, numFood, maxFood, stopAfter)
     {
 
-        this._circList = Circle.genCircles(numCirc,this._screenSize.w,
+        this._circList = Circle.genCircles(numCirc,this._screenSize.w*0.75,
             this._screenSize.h, this._circInitVals);
         
-        this._squareList = Square.genSquares(numSquare,this._screenSize.w,
+        this._squareList = Square.genSquares(numSquare,this._screenSize.w*0.75,
                 this._screenSize.h, this._squareInitVals);
 
-        this._spinSquareList = SpinSquare.genSpinSquares(numSpinSquare,this._screenSize.w,
+        this._spinSquareList = SpinSquare.genSpinSquares(numSpinSquare,this._screenSize.w*0.8,
             this._screenSize.h, this._spinSquareInitVals);
 
         this._circList.forEach(c => this._speciesList.push(c));
@@ -69,13 +69,13 @@ steeringForce, mutationRate, maxSize + dTheta for SpinSquare
         {
             this._ctx.beginPath();
             this._ctx.strokeStyle = "#cccccc";
-            this._ctx.arc(this._screenSize.w/2, this._screenSize.h/2,300,0,2*Math.PI);
+          //  this._ctx.arc(this._screenSize.w/2, this._screenSize.h/2,this._screenSize.h/2+10,0,2*Math.PI);
             this._ctx.stroke();
             if(this._frameCount % nFrames === 0)
             {
                 this._speciesList.forEach(s => {
                     let dist = Vector.Dist(new Vector(this._screenSize.w/2, this._screenSize.h/2), s.position);
-                    if(dist < 300)
+                    if(dist < this._screenSize.h/2)
                     {
                         s.render(this._ctx, this._screenSize.w, this._screenSize.h)
                     }
