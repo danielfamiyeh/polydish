@@ -28,9 +28,9 @@ steeringForce, mutationRate, maxSize + dTheta for SpinSquare
         this._screenSize = size;
 
         //Initial Max values for species
-        this._circInitVals = [500, Tools.randRGB(), 5, 0.2, 30, 0.09, 0.3, 3];
-        this._squareInitVals = [500, Tools.randRGB(), 5, 0.2, 30, 0.09, 0.3, 1.5];
-        this._spinSquareInitVals = [500, Tools.randRGB(), 4, 0.2, 30, 0.09, 0.3, 1.5, Tools.randNum() * 5];
+        this._circInitVals = [500, Tools.randRGB(), 5, 0.2, 30, 0.09, 0.3, 10];
+        this._squareInitVals = [500, Tools.randRGB(), 5, 0.2, 30, 0.09, 0.3, 10];
+        this._spinSquareInitVals = [500, Tools.randRGB(), 4, 0.2, 30, 0.09, 0.3, 10, Tools.randNum() * 5];
         this._speciesList = [];
     }
 

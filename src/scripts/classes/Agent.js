@@ -164,40 +164,6 @@ export default class Agent
                 steerForce.constrain(0.05*this.maxSpeed);
                 this.addForce(steerForce);
         }
-        /*
-        if(this._position.x <= 0)
-        {
-            let target = new Vector(this._maxSpeed, this._velocity.y),
-            steer = Vector.Sub(target, this._velocity);
-            steer.constrain(this._steeringForce);
-            steer.scale(0.5);
-            this.addForce(steer);
-        }
-        if(this._position.x >= WIDTH)
-        {
-            let target = new Vector(-this._maxSpeed, this._velocity.y),
-            steer = Vector.Sub(target, this._velocity);
-            steer.constrain(this._steeringForce);
-            steer.scale(0.5);
-            this.addForce(steer);
-        }
-        if(this._position.y <= 0)
-        {
-            let target = new Vector(this._velocity.x, this._maxSpeed),
-            steer = Vector.Sub(target, this._velocity);
-            steer.constrain(this._steeringForce);
-            steer.scale(0.5);
-            this.addForce(steer);
-        }
-        if(this._position.y >= HEIGHT)
-        {
-            let target = new Vector(this._velocity.x, -this._maxSpeed),
-            steer = Vector.Sub(target, this._velocity);
-            steer.constrain(this._steeringForce);
-            steer.scale(0.5);
-            this.addForce(steer);
-        }
-        */
     }
 
     //Reproductive Functions
