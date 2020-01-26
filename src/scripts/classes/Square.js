@@ -1,4 +1,4 @@
-import Agent from "./Agent.js"
+import Agent from "./Agent.js";
 import Tools from "./helper/Tools.js";
 import Vector from "./Vector.js";
 

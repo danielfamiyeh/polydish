@@ -36,24 +36,24 @@ steeringForce, mutationRate, maxSize + dTheta for SpinSquare
 
     initSpecies(numCirc, numSquare, numSpinSquare, numFood, maxFood, stopAfter)
     {
-
+        //Initialise lists of species
         this._circList = Circle.genCircles(numCirc,this._screenSize.w*0.75,
             this._screenSize.h, this._circInitVals);
-        
         this._squareList = Square.genSquares(numSquare,this._screenSize.w*0.75,
                 this._screenSize.h, this._squareInitVals);
-
         this._spinSquareList = SpinSquare.genSpinSquares(numSpinSquare,this._screenSize.w*0.8,
             this._screenSize.h, this._spinSquareInitVals);
-
+        
+        //Add shape lists to main species list
         this._circList.forEach(c => this._speciesList.push(c));
         this._squareList.forEach(s => this._speciesList.push(s));
         this._spinSquareList.forEach(ss => this._speciesList.push(ss));
 
+        //Initialise food
         this._foodList = Food.genFood(this._screenSize, numFood);
-
-        this._maxFood = maxFood;
         
+        //Set limits
+        this._maxFood = maxFood;
         this._stopAfter = stopAfter;
     }
 
@@ -65,6 +65,7 @@ steeringForce, mutationRate, maxSize + dTheta for SpinSquare
 
     render(nFrames=1)
     {
+       // this._ctx.clearRect(0,0,this._screenSize.w, this._screenSize.h);
         if(this._frameCount < this._stopAfter)
         {
             this._ctx.beginPath();
@@ -90,8 +91,7 @@ steeringForce, mutationRate, maxSize + dTheta for SpinSquare
         {
             if(this._foodList.length < this._maxFood)
             {
-              //  this._foodList.push(new Food(new Vector(Math.random() * this._screenSize.w, Math.random() * this._screenSize.h,)),
-                //Tools.randRGB());
+                this._foodList.push(new Food(new Vector(Math.random() * this._screenSize.w, Math.random() * this._screenSize.h), Tools.randRGB()));
             }
 
             this._speciesList.forEach((s,i) => 
@@ -126,12 +126,16 @@ steeringForce, mutationRate, maxSize + dTheta for SpinSquare
         }
     }
 
+
+    //Save canvas as image
     saveImage()
     {
         this._canvas.toBlob(function(blob) {
             saveAs(blob, "polydish.png");
         });
     }
+
+    //Getters and setters
 
     get circInitVals()
     {

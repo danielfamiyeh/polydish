@@ -1,10 +1,11 @@
-//Abstract Agent Class
+//Abstract Autonomous Agent Class
 import Vector from "./Vector.js";
 import Tools from "./helper/Tools.js";
 import Circle from "./Circle.js";
+
 export default class Agent
 {
-    constructor(p, v, e, c, ms, ec, rop, sf, mr)
+    constructor(pos, vel, energy, colour, maxSpeed, energyConsump, radOfPerep, steerForce, mutRate)
     {
         if(this.constructor === Agent)
         {
@@ -16,21 +17,21 @@ export default class Agent
         }
 
         this._timeAlive = 0;
-        this._position = p;
-        this._velocity = v;
-        this._initialEnergy = e;
-        this._maxSpeed = ms;
+        this._position = pos;
+        this._velocity = vel;
+        this._initialEnergy = energy;
+        this._maxSpeed = maxSpeed;
         this._acceleration = new Vector(0,0);
-        this._trueColour = [c[0],c[1],c[2]];
-        this._colour = c;
-        this._energy = e;
+        this._trueColour = [colour[0],colour[1],colour[2]];
+        this._colour = colour;
+        this._energy = energy;
         this._size = 1 * this._timeAlive;
-        this._consumption = ec;
+        this._consumption = energyConsump;
         this._shouldReproduce = false;
-        this._rop = rop;
+        this._rop = radOfPerep;
         this._size = 0.01;
-        this._steeringForce = sf;
-        this._mutationRate = mr;
+        this._steeringForce = steerForce;
+        this._mutationRate = mutRate;
         this._shouldSwarm = true;
         this._faceHeading = true;
     }
@@ -54,10 +55,9 @@ export default class Agent
         }
     }
 
-    
+    //Seek targets given as vectors
     seek(target)
     {
-
         if(target.x != null && target.y != null)
         {
             let dir = Vector.Sub(target, this._position),
@@ -73,11 +73,11 @@ export default class Agent
         }
     }
 
-    //Swarm Mechanics - Make Variable
-    swarm(agentList)
+    swarm(agentList) //Swarm Mechanics
     {
         this.align(agentList);
         this.cohesion(agentList);
+        this.separation(agentList);
     }
 
     align(agentList) //alignment
@@ -100,7 +100,7 @@ export default class Agent
                     steeringForce = Vector.Sub(targetVelocity, this.velocity);
                 
                 steeringForce.constrain(this._steeringForce);
-                steeringForce.scale(0.05);
+                steeringForce.scale(0.5);
                 this.addForce(steeringForce);
             }
         }
@@ -132,13 +132,40 @@ export default class Agent
         }
     }
 
+    separation(agentList)
+    {
+        let tot = 0,
+            avgVel = new Vector(0,0);
+
+        for(let agent in agentList)
+        {
+            let dist = Vector.Dist(agentList[agent].position, this._position);
+            if(dist < this._rop && dist > 0)
+            {
+                avgVel.add(agentList[agent].velocity);
+                tot++;
+            }
+
+            if(tot > 0)
+            {
+                avgVel.scale(1/tot);
+                let targetVel = Vector.Scale(Vector.Normalise(avgVel), this._maxSpeed),
+                    steer = Vector.Sub(this._velocity, targetVel);
+
+                steer.constrain(this._steeringForce);
+                this.addForce(steer);
+            }
+        }
+
+    }
+
     //Changing colour based on food eaten
     changeColour(food)
     {
         console.log("chagning");
-        let deltaR = (food.colour[0] - this._colour[0])/2,
-            deltaG = (food.colour[1] - this._colour[1])/2,
-            deltaB = (food.colour[2] - this._colour[2])/2;
+        let deltaR = (food.colour[0] - this._colour[0])/3,
+            deltaG = (food.colour[1] - this._colour[1])/3,
+            deltaB = (food.colour[2] - this._colour[2])/3;
 
         this._colour[0] += deltaR;
         this._colour[1] += deltaG;
