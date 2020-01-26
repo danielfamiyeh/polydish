@@ -7,11 +7,12 @@ export default class Agent
 {
     constructor(pos, vel, energy, colour, maxSpeed, energyConsump, radOfPerep, steerForce, mutRate)
     {
-        if(this.constructor === Agent)
+        if(this.constructor === Agent) // So an 'agent' cannot be instantiated.
         {
             throw new TypeError("Abstract class Agent can not be instantiated directly.");
         }
-        if(this.render === undefined)
+
+        if(this.render === undefined) //Enforcing abstract 'render' method.
         {
             throw new TypeError("Objects implementing Agent class must have render method.");
         }
@@ -36,7 +37,7 @@ export default class Agent
         this._faceHeading = true;
     }
 
-    update(antList)
+    update(antList) //Update function to be called every frame for an AA.
     {
         if(this._shouldSwarm) this.swarm(antList);
 
@@ -55,8 +56,7 @@ export default class Agent
         }
     }
 
-    //Seek targets given as vectors
-    seek(target)
+    seek(target) //Seek targets given as vectors
     {
         if(target.x != null && target.y != null)
         {
@@ -88,7 +88,7 @@ export default class Agent
         {
             let dir = Vector.Sub(agentList[agent].position, this._position),
                 dist = dir.mag;
-            if(dist<this._rop && dist>0 && agentList[agent].constructor === this.constructor)
+            if(dist<10*this._rop && dist>0 && agentList[agent].constructor === this.constructor)
             {
                 tot++;
                 avgVel.add(agentList[agent].velocity);
@@ -114,7 +114,7 @@ export default class Agent
         {
             let dir = Vector.Sub(agentList[agent].position, this._position),
                 dist = dir.mag;
-            if(dist<this._rop && dist>0 && this.constructor === agentList[agent].constructor)
+            if(dist<10*this._rop && dist>0 && this.constructor === agentList[agent].constructor)
             {
                 avgPos.add(agentList[agent].position);
                 tot++;
@@ -132,14 +132,15 @@ export default class Agent
         }
     }
 
-    separation(agentList)
+    separation(agentList) //Not working?
     {
         let tot = 0,
             avgVel = new Vector(0,0);
 
         for(let agent in agentList)
         {
-            let dist = Vector.Dist(agentList[agent].position, this._position);
+            let dir = Vector.Sub(agentList[agent].position, this._position),
+                dist = dir.mag;
             if(dist < this._rop && dist > 0)
             {
                 avgVel.add(agentList[agent].velocity);
