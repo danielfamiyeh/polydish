@@ -31,12 +31,12 @@ export default class Circle extends Agent
     {
         if(this._energy > 0)
         {
-            if(this._size < 0.02*WIDTH/8)
+            if(this._size < 0.02*WIDTH/20)
             {
                 this._size += 0.0005 * this._timeAlive;
             }
 
-            ctx.strokeStyle = `rgba(${this._colour[0]},${this._colour[1]},${this.colour[2]},${0.2*(this._energy/this._initialEnergy)})`;
+            ctx.strokeStyle = `rgba(${this._colour[0]},${this._colour[1]},${this.colour[2]},${0.55*(this._energy/this._initialEnergy)})`;
             ctx.beginPath();
             ctx.arc(this._position.x, this._position.y, this._size, 0, 2*Math.PI);
             ctx.stroke();

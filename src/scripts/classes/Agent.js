@@ -48,7 +48,7 @@ export default class Agent
             this._position.add(this._velocity);
             this._acceleration.scale(0);
 
-            this._shouldReproduce = (Math.random() * 100 < 10  && this._timeAlive > 250) ? true : false;
+            this._shouldReproduce = (Math.random() * 100 < 1  && this._timeAlive > 250) ? true : false;
             if(this._shouldReproduce) this.reproduce(antList);
 
             this._energy-=this._consumption;

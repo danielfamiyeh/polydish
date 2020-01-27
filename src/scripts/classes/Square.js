@@ -31,13 +31,13 @@ export default class Square extends Agent
     {
         if(this._energy > 0)
         {
-            if(this._size < 0.01 * WIDTH/8)
+            if(this._size < 0.01 * WIDTH/40)
             {
                 this._size += 0.01 * this._timeAlive;
             }
             ctx.save();
             Tools.rotate(ctx,this, Math.atan2(this.heading.y,this.heading.x))
-            ctx.strokeStyle = `rgba(${this._colour[0]},${this._colour[1]},${this._colour[2]},${0.2*(this._energy/this._initialEnergy)})`;
+            ctx.strokeStyle = `rgba(${this._colour[0]},${this._colour[1]},${this._colour[2]},${0.55*(this._energy/this._initialEnergy)})`;
             ctx.strokeRect(this._position.x, this._position.y, this._size, this._size);
             ctx.restore();
         }

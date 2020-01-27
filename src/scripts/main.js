@@ -13,16 +13,16 @@ saveBtn.addEventListener("click", function(e){dish.saveImage()});
 
 function main()
 {
-    if(count % 450 == 0)
+    if(count % 600 == 0)
     {
         let newColour = Colour.Random();
         dish = new PolyDish(canvas, new Dimension(window.innerWidth,window.innerHeight),"#000000");
         dish.circInitVals[1] = newColour.rgbAsList();
-        dish.squareInitVals[1] =  Math.floor(Math.random() * 2 < 1) ? [255,255,255] : newColour.rgbAsList();
-        dish.spinSquareInitVals[1] = (Math.random() * 10 < 5) ? newColour.compliment.rgbAsList() : [255,255,255];
-        dish.initSpecies(10,10,10,300,300,400);
+        dish.squareInitVals[1] = newColour.rgbAsList();
+        dish.spinSquareInitVals[1] = newColour.compliment.rgbAsList();
+        dish.initSpecies(10,10,10,300,300,550);
     }
-    dish.run(1);
+    dish.run();
     window.requestAnimationFrame(main);
     count++;
 }
