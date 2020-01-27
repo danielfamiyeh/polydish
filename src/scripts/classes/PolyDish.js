@@ -1,9 +1,9 @@
 import Tools from "./helper/Tools.js";
-import Circle from "./Circle.js";
-import Square from "./Square.js";
-import SpinSquare from "./SpinSquare.js";
+import Circle from "./species/Circle.js";
+import Square from "./species/Square.js";
+import SpinSquare from "./species/SpinSquare.js";
 import Food from "./Food.js";
-import Vector from "./Vector.js";
+import Vector from "./helper/Vector.js";
 
 export default class PolyDish
 {

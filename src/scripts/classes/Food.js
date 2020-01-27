@@ -1,5 +1,5 @@
 import Tools from "./helper/Tools.js";
-import Vector from "./Vector.js";
+import Vector from "./helper/Vector.js";
 export default class Food
 {
     constructor(pos, col)

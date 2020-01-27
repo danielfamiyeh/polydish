@@ -1,6 +1,6 @@
 //Abstract Autonomous Agent Class
-import Vector from "./Vector.js";
-import Tools from "./helper/Tools.js";
+import Vector from "../helper/Vector.js";
+import Tools from "../helper/Tools.js";
 import Circle from "./Circle.js";
 
 export default class Agent
