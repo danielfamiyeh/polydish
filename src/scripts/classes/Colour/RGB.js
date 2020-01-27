@@ -1,3 +1,5 @@
+import HSV from "./HSV.js";
+
 export default class RGB
 {
     constructor(r,g,b,a=1)
@@ -20,6 +22,17 @@ export default class RGB
         ctx.fillStyle = `rgba(${this._r}, ${this._g}, ${this._b}, ${this._a})`;
     }
 
+    //Triadic Harmony
+    triadic()
+    {
+        let colAsHSV = this.asHSV(),
+        posComp = new HSV(colAsHSV[0] + 60, colAsHSV[1], colAsHSV[2]),
+        negComp = new HSV(colAsHSV[0] - 60, colAsHSV[1], colAsHSV[2]);
+
+        return [posComp.asRGB(), negComp.asRGB()];
+    }
+
+    //RGB to HSV converter
     asHSV()
     {
         let rPrime = this._r/255,
