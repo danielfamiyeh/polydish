@@ -48,8 +48,8 @@ export default class Agent
             this._position.add(this._velocity);
             this._acceleration.scale(0);
 
-            this._shouldReproduce = (Math.random() * 100 < 50) ? true : false;
-            if(this._shouldReproduce && this._timeAlive > 250) this.reproduce(antList);
+            this._shouldReproduce = (Math.random() * 100 < 10  && this._timeAlive > 250) ? true : false;
+            if(this._shouldReproduce) this.reproduce(antList);
 
             this._energy-=this._consumption;
             this._timeAlive++;
@@ -88,7 +88,7 @@ export default class Agent
         {
             let dir = Vector.Sub(agentList[agent].position, this._position),
                 dist = dir.mag;
-            if(dist<10*this._rop && dist>0 && agentList[agent].constructor === this.constructor)
+            if(dist<this._rop && dist>0 && agentList[agent].constructor === this.constructor)
             {
                 tot++;
                 avgVel.add(agentList[agent].velocity);
@@ -123,7 +123,7 @@ export default class Agent
         if(tot > 0)
         {
             avgPos.scale(1/tot);
-            let targetVelocity = Vector.Scale(Vector.Normalise(Vector.Sub(avgPos, this.position)), this._maxSpeed),
+            let targetVelocity = Vector.Scale(Vector.Normalise(Vector.Sub(avgPos, this._position)), this._maxSpeed),
                 steeringForce = Vector.Sub(targetVelocity, this._velocity);
 
                 steeringForce.constrain(this._steeringForce);
@@ -159,28 +159,24 @@ export default class Agent
         }
 
     }
-
-    //Changing colour based on food eaten
-    changeColour(food)
+    
+    changeColour(food) //Changing colour based on food eaten
     {
-        console.log("chagning");
-        let deltaR = (food.colour[0] - this._colour[0])/3,
-            deltaG = (food.colour[1] - this._colour[1])/3,
-            deltaB = (food.colour[2] - this._colour[2])/3;
+        let deltaR = (food.colour[0] - this._colour[0])/4,
+            deltaG = (food.colour[1] - this._colour[1])/4,
+            deltaB = (food.colour[2] - this._colour[2])/4;
 
         this._colour[0] += deltaR;
         this._colour[1] += deltaG;
         this._colour[2] += deltaB;
     }
     
-    //Adding forces to movement
-    addForce(f)
+    addForce(f) //Adding forces to movement
     {
         this._acceleration.add(f);
     }
 
-    //Keep agent in screen
-    keepInBounds(WIDTH, HEIGHT)
+    keepInBounds(WIDTH, HEIGHT) //Keep agent in screen
     {
         let dist = Vector.Mag(Vector.Sub(new Vector(WIDTH/2,HEIGHT/2), this._position));
         if(dist >= HEIGHT/2)
@@ -191,28 +187,6 @@ export default class Agent
 
                 steerForce.constrain(0.05*this.maxSpeed);
                 this.addForce(steerForce);
-        }
-    }
-
-    //Reproductive Functions
-
-    reproduce(antList)
-    {
-        if(antList.length < 150) //make max ants variable
-        {
-            antList.forEach(ant => {
-                let dist = Vector.Sub(ant.position, this._position).mag;
-
-                if(dist > 0 && dist <= 10 && ant != this && this.constructor === ant.constructor)
-                {
-                    let midPoint = Tools.randNumFloor(0,this.genome.length);   
-                    let childGenome = this.crossover(this.genome, ant.genome, midPoint);
-                    if(Math.random() * 100 <= this._mutationRate * 100) this.mutate(childGenome);
-                    let newAnt = new Circle(childGenome[0], childGenome[1], childGenome[2], childGenome[3], childGenome[4], childGenome[5], childGenome[6], childGenome[7], this._mutationRate);
-                    antList.push(newAnt);
-                    this._energy-=50;
-                }
-            })
         }
     }
 

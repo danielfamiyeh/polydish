@@ -7,7 +7,7 @@ import Vector from "./Vector.js";
 
 export default class PolyDish
 {
-    /*Initial Energy, BaseRGB, maxSpeed, energyConsump, radOfPerce
+    /*Initial Energy, BaseRGB, maxSpeed, energyConsump, radOfPercep
 steeringForce, mutationRate, maxSize + dTheta for SpinSquare
 */
 
@@ -65,13 +65,8 @@ steeringForce, mutationRate, maxSize + dTheta for SpinSquare
 
     render(nFrames=1)
     {
-       // this._ctx.clearRect(0,0,this._screenSize.w, this._screenSize.h);
         if(this._frameCount < this._stopAfter)
         {
-            this._ctx.beginPath();
-            this._ctx.strokeStyle = "#cccccc";
-          //  this._ctx.arc(this._screenSize.w/2, this._screenSize.h/2,this._screenSize.h/2+10,0,2*Math.PI);
-            this._ctx.stroke();
             if(this._frameCount % nFrames === 0)
             {
                 this._speciesList.forEach(s => {

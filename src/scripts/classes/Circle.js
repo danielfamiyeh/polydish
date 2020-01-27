@@ -36,12 +36,30 @@ export default class Circle extends Agent
                 this._size += 0.0005 * this._timeAlive;
             }
 
-            ctx.strokeStyle = `rgba(${this._colour[0]},${this._colour[1]},${this.colour[2]},${0.55*(this._energy/this._initialEnergy)})`;
+            ctx.strokeStyle = `rgba(${this._colour[0]},${this._colour[1]},${this.colour[2]},${0.2*(this._energy/this._initialEnergy)})`;
             ctx.beginPath();
             ctx.arc(this._position.x, this._position.y, this._size, 0, 2*Math.PI);
             ctx.stroke();
         }
     }
 
-    
+    reproduce(antList) //Reproductive Functions
+    {
+        if(antList.length < 150)
+        {
+            antList.forEach(ant => {
+                let dist = Vector.Sub(ant.position, this._position).mag;
+
+                if(dist > 0 && dist <= 10 && ant != this && this.constructor === ant.constructor)
+                {
+                    let midPoint = Tools.randNumFloor(0,this.genome.length);   
+                    let childGenome = this.crossover(this.genome, ant.genome, midPoint);
+                    if(Math.random() * 100 <= this._mutationRate * 100) this.mutate(childGenome);
+                    let newAnt = new Circle(childGenome[0], childGenome[1], childGenome[2], childGenome[3], childGenome[4], childGenome[5], childGenome[6], childGenome[7], this._mutationRate);
+                    antList.push(newAnt);
+                    this._energy-=50;
+                }
+            })
+        }
+    }    
 }
