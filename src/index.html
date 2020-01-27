@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body
+        {
+            background-color: black;
+            overflow: hidden;
+        }
+        canvas
+        {
+            border: 1px solid #000000;
+            display: block;
+            margin: 0 auto;
+            filter: contrast(150%);
+            filter: brightness(120%);
+            z-index: 0;
+        }
+
+        #saveBtn
+        {
+            z-index: 3;
+            position: absolute;
+            top: 2vh;
+            left: 1vw;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="src/scripts/classes/helper/FileSaver.js"></script>
+    <canvas id="canvas"></canvas>
+    <script type="module" src = "src/scripts/main.js"></script>
+</body>
+</html>
