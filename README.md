@@ -25,4 +25,4 @@ Swarm mechanics are a set of algorithms that are meant to produce movement that 
 These are used in the ecosystem so that like-shapes that are near each other flock toghether producing similar strokes.
 
 Link to Visualiser:
-danielfamiyeh.github.io/polydish/src/
+https://danielfamiyeh.github.io/polydish/src/
