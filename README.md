@@ -23,3 +23,6 @@ A mutation function and a hereditary mutation rate mean that there is a chance t
 All of these variables mean a wide variety in the paintings produced.
 Swarm mechanics are a set of algorithms that are meant to produce movement that mimics the flocking behaviour of birds, commonly used in games and animation.
 These are used in the ecosystem so that like-shapes that are near each other flock toghether producing similar strokes.
+
+Link to Visualiser:
+danielfamiyeh.github.io/polydish/src/
