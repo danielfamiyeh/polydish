@@ -23,3 +23,5 @@ The organisms in the dish are shapes _Squares_, _Circles_ and _Rotating Squares_
 * Energy Consumption per Frame
 
 Swarm mechanics are a set of algorithms meant to produce movement that mimics the flocking behaviour of birds, commonly used in games and animation. These are used in the ecosystem so that like-shapes near each other flock together, producing similar strokes.
+
+This project was curated as part of the Norman Rea Gallery's _Virtually Real_ exhibition.
