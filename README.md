@@ -8,11 +8,12 @@ POLYDISH simulates a virtual ecosystem that generates art by having organisms pa
 It's a project based on an area of study known as genetic algorithms.
 GAs entail finding solutions to problems by thinking of data as 'genes' and groups of data as 'genomes'.
 Solutions are found by simulating natural selection on groups of data where the 'fittest', i.e. genomes that more closely represent the solution, have more chance to pass them on.
-Genes are selected from either parent and passed down via a crossover function.
+Genes are selected from either parent and passed down via a crossover function.<br>
 A mutation function sometimes alters them to allow for greater variety in the resulting pool.
 
 The organisms in the dish are shapes _Squares_, _Circles_ and _Rotating Squares_.
-<br>They survive by consuming food, which changes their colour, producing multi-coloured paths. They all have 'traits' that affect the lines drawn, such as:
+<br>They survive by consuming food, which changes their colour, producing multi-coloured paths.
+<br>They all have 'traits' that affect the lines drawn, such as:
 
 * Birth Colour
 * Initial Angle of Movement
